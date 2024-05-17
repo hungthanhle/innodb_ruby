@@ -33,6 +33,7 @@ module Innodb
       page = @space.page(page_number)
       raise "Page #{page_number} couldn't be read" unless page
 
+      # binding.irb
       page.record_describer = @record_describer
       page
     end
