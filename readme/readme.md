@@ -71,19 +71,26 @@ end
 
 gem install gnuplot
 
-cd Downloads/db_sample/
+innodb_space -s /var/lib/mysql/ibdata1 -T employees/dept_manager -I dept_no -p 4 index-recurse
+innodb_space -s /var/lib/mysql/ibdata1 -T employees/dept_manager -I PRIMARY -p 3 index-recurse
+```
+```
+cd /home/Downloads/db_sample/
 touch employees_db.rb
 vi employees_db.rb
 dùng file ở /examples/describer/employees_db.rb
 
-innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_sample/employees_db.rb -d Employees_dept_manager_dept_no -p 3 index-recurse
+innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_sample/employees_db.rb -d Employees_dept_manager_dept_no -p 4 index-recurse
+innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_sample/employees_db.rb -d Employees_dept_manager_PRIMARY -p 3 index-recurse
+
+
+
+Index must be specified using a combination of either --space-file (-f) and --page (-p) or --system-space-file (-s), --table-name (-T), and --index-name (-I); see --help for usage information:
+(-s and -T and -I):
+innodb_space -s /var/lib/mysql/ibdata1 -T employees/dept_manager -I dept_no -p 4 index-recurse
+(-f and -p):
 innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_sample/employees_db.rb -d Employees_dept_manager_dept_no -p 4 index-recurse
 
-innodb_space -s /var/lib/mysql/ibdata1 -T employees/dept_manager -I dept_no index-recurse
-
-Index must be specified using a combination of either --space-file (-f) and --page (-p) or --system-space-file (-s), --table-name (-T), and --index-name (-I); see --help for usage information
-
-innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_sample/employees_db.rb -d Employees_dept_manager_PRIMARY -p 4 index-recurse
 
 innodb_space -f /var/lib/mysql/test/t.ibd -r /home/Downloads/db_sample/simple_describer.rb -d SimpleTDescriber -p 3 index-digraph
 ```

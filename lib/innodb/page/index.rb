@@ -625,7 +625,8 @@ module Innodb
 
             # Read the fields present in this record.
             record_fields.each do |f|
-              p = fmap[f.position]
+              # fmap = {0=>:key, 1=>:key, 4=>:row, 5=>:row, 6=>:row, 7=>:row, 8=>:row, 9=>:row, 10=>:row, 11=>:row, 12=>:row, 13=>:row, 2=>:sys, 3=>:sys}
+              p = fmap[f.position] #:row
               c.name("#{p}[#{f.name}]") do
                 this_record[p] << FieldDescriptor.new(
                   name: f.name,

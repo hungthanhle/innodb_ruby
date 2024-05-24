@@ -86,6 +86,7 @@ module Innodb
 
     # Read the data value (e.g. encoded in the data).
     def value(cursor, record)
+      # binding.irb
       return :NULL if null?(record)
 
       value_by_length(cursor, length(record))

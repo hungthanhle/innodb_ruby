@@ -31,7 +31,8 @@ module Innodb
 
     def page(page_number)
       page = @space.page(page_number)
-      raise "Page #{page_number} couldn't be read" unless page
+      # raise "Page #{page_number} couldn't be read" unless page
+      return nil unless page
 
       # binding.irb
       page.record_describer = @record_describer
@@ -60,8 +61,8 @@ module Innodb
 
       parent_page.each_child_page do |child_page_number, child_min_key|
         child_page = page(child_page_number)
-        child_page.record_describer = record_describer
-        next unless child_page.is_a?(Innodb::Page::Index)
+        next unless child_page&.is_a?(Innodb::Page::Index)
+        child_page&.record_describer = record_describer
 
         link_proc&.call(parent_page, child_page, child_min_key, depth + 1)
         _recurse(child_page, page_proc, link_proc, depth + 1)

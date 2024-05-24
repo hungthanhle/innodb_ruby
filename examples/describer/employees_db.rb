@@ -103,6 +103,8 @@ class Employees_dept_emp_dept_no < Innodb::RecordDescriber
   type :secondary
   key "dept_no",        "CHAR(4)", :NOT_NULL
   row "emp_no",         :INT, :NOT_NULL
+  # row "from_date",      :MEDIUMINT, :NOT_NULL
+  # row "to_date",        :MEDIUMINT, :NOT_NULL
 end
 
 # CREATE TABLE titles (
