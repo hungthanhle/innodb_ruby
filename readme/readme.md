@@ -94,3 +94,49 @@ innodb_space -f /var/lib/mysql/employees/dept_manager.ibd -r /home/Downloads/db_
 
 innodb_space -f /var/lib/mysql/test/t.ibd -r /home/Downloads/db_sample/simple_describer.rb -d SimpleTDescriber -p 3 index-digraph
 ```
+
+```
+root@15946f90c5a6:/# cd Downloads/db_sample/
+bash: cd: Downloads/db_sample/: No such file or directory
+root@15946f90c5a6:/# cd /home/Downloads/db_sample/
+root@15946f90c5a6:/home/Downloads/db_sample# git clone https://github.com/hungthanhle/employees_test_db.git
+Cloning into 'employees_test_db'...
+remote: Enumerating objects: 124, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 124 (delta 0), reused 1 (delta 0), pack-reused 120
+Receiving objects: 100% (124/124), 74.28 MiB | 8.31 MiB/s, done.
+Resolving deltas: 100% (62/62), done.
+root@15946f90c5a6:/home/Downloads/db_sample# cd employees_test_db/
+root@15946f90c5a6:/home/Downloads/db_sample/employees_test_db# mysql < employees.sql
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@15946f90c5a6:/home/Downloads/db_sample/employees_test_db# mysql < employees.sql -u root -p
+Enter password: 
+INFO
+CREATING DATABASE STRUCTURE
+INFO
+storage engine: InnoDB
+INFO
+LOADING departments
+INFO
+LOADING employees
+INFO
+
+root@15946f90c5a6:/home/Downloads/db_sample/employees_test_db# mysql -u root -p     
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 15
+Server version: 10.3.39-MariaDB-0ubuntu0.20.04.2 Ubuntu 20.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> select * from other_db.employees limit 1;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  10001 | 1953-09-02 | Georgi     | Facello   | M      | 1986-06-26 |
++--------+------------+------------+-----------+--------+------------+
+1 row in set (0.000 sec)
+```
